@@ -22,7 +22,7 @@ const AuthForm = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { values, handleChange, handleSubmit, errors, touched, setFieldValue } = useFormik({
+  const { values, handleChange, handleSubmit, errors, touched, setFieldValue, handleBlur } = useFormik({
     initialValues: {
       ...inputFields.reduce((acc, field) => {
         acc[field.name] = "";
@@ -63,6 +63,7 @@ const AuthForm = ({
                   name={field.name}
                   value={values[field.name]}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder={field.placeholder}
                 />
                 <i className={field.iconClass} />

@@ -93,7 +93,7 @@ function ProjectForm({ isOpen, setIsOpen, title, project, formType }) {
                   </>
                   <div className="pt-8">
                     <input
-                      className="w-full"
+                      className="w-full hover:scale-90 transition-transform duration-300"
                       type="submit"
                       value={
                         formType === "edit"

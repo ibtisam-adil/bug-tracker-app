@@ -11,10 +11,15 @@ const ProjectTickets = ({project_id}) => {
   const tickets = useMemo(() => data, [data]);
 
   return (
-    <div className="bg-[#F7F8FB] m-8">
+    <div className="bg-[#F7F8FB] m-8 border border-blue-500 sm:max-h-[600px] overflow-auto collaborator-container">
       <h3 className="text-3xl text-center p-4">Tickets</h3>
       <div className="collaborators">
         <table className="styled-table">
+            <colgroup>
+                <col style={{ width: "33%" }} />
+                <col style={{ width: "33%" }} />
+                <col style={{ width: "33%" }} />
+            </colgroup>
           <thead>
             <tr>
               <th>title</th>
@@ -27,15 +32,15 @@ const ProjectTickets = ({project_id}) => {
               tickets.map((ticket) => (
                 <tr key={ticket.id}>
                   <td className="project-name">
-                    <NavLink className='border-b-2 border-blue-500'
+                    <NavLink className='border-b border-blue-500'
                       state={{ id: ticket.id, project_id }}
                       to={`/tickets/${ticket.id}`}
                     >
                       {ticket.title}
                     </NavLink>
                   </td>
-                  <td style={{ width: "65%" }}>{ticket.bug_type}</td>
-                  <td>{ticket.status}</td>
+                  <td>{ticket.bug_type}</td>
+                  <td className={`${ticket.bug_type === 'open' ? 'text-green-500' : 'text-red-500'}`}>{ticket.status}</td>
                 </tr>
               ))}
           </tbody>

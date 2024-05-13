@@ -7,15 +7,15 @@ export const fetchProjectTickets = createAsyncThunk(
     async (id) => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`http://localhost:3000/projects/${id}/users_and_bugs_by_project`, {
+            const response = await axios.get(`http://bug-zilla.onrender.com/projects/${id}/users_and_bugs_by_project`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: token,
                 },
             });
             return response.data;
-        } catch (response) {
-            console.error("Error fetching project tickets: ", response);
+        } catch (error) {
+            throw error.response.data;
         }
     })
 
@@ -23,10 +23,9 @@ export const fetchProjectTickets = createAsyncThunk(
         "projecttickets/assignUserToProject",
         async ({ id : developer_id, projectId }) => {
             const token = localStorage.getItem("token");
-            console.log(token)
             try {
                 const response = await axios.post(
-                    `http://localhost:3000/projects/${projectId}/assign_user/${developer_id}`, 
+                    `http://bug-zilla.onrender.com/projects/${projectId}/assign_user/${developer_id}`, 
                     null,
                     {
                         headers: {
@@ -50,7 +49,7 @@ export const fetchProjectTickets = createAsyncThunk(
             const token = localStorage.getItem("token");
             try {
                 const response = await axios.delete(
-                    `http://localhost:3000/projects/${project_id}/remove_user/${id}`,
+                    `http://bug-zilla.onrender.com/projects/${project_id}/remove_user/${id}`,
                     {
                         headers: {
                             "Content-Type": "application/json",

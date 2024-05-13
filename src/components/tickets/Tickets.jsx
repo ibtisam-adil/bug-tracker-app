@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTickets } from "../../features/ticket/ticketThunks";
-import "./ticket.css";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -37,36 +36,46 @@ const TicketsTable = () => {
 
   return (
     <section className="projects-section">
-      <h1 className="dashboard-header">Tickets</h1>
+   <div className="h-40 bg-white mx-auto mt-4 p-8 w-[calc(100%-30px)] rounded-lg shadow-md border-blue-500 border">
       <div className="ticket-filters ">
-        <form className="grid grid-cols-3">
+        <form className="flex gap-4">
+        <div className="relative sm:w-[15rem] md:w-[18rem] xl:w-[25rem]">
           <input
-            className="p-4 border"
+            className="placeholder-gray-900 sm:text-[10px] md:text-xl border border-black p-4 rounded-xl text-[5px] w-[80px] sm:w-full hover:border-blue-500"
             type="text"
             placeholder="filter by project name"
             name="search"
             autoComplete="off"
             onChange={(e) => setProjectFilter(e.target.value)}
           />
+          <i className="bx bx-search text-3xl absolute top-1/2 transform -translate-y-1/2 right-0 sm:right-4" />
+          </div>
+          <div className="relative sm:w-[15rem] md:w-[18rem] xl:w-[25rem]">
           <input
-            className="p-4 border"
+            className="placeholder-gray-900 sm:text-[10px] md:text-xl border text-[5px] border-black p-4 rounded-xl w-[80px] sm:w-full hover:border-blue-500"
             type="text"
             placeholder="Filter by Status"
             name="statusFilter"
             autoComplete="off"
             onChange={(e) => setStatusFilter(e.target.value)}
           />
+          <i className="bx bx-search text-3xl absolute top-1/2 transform -translate-y-1/2 right-2 sm:right-4" />
+          </div>
+          <div className="relative sm:w-[15rem] md:w-[18rem] xl:w-[25rem]">
           <input
-            className="p-4 border"
+            className="placeholder-gray-900 sm:text-[10px] md:text-xl border text-[5px] border-black p-4 rounded-xl w-[80px] sm:w-full hover:border-blue-500"
             type="text"
             placeholder="Filter by Type"
             name="typeFilter"
             autoComplete="off"
             onChange={(e) => setTypeFilter(e.target.value)}
           />
+          <i className="bx bx-search text-3xl absolute top-1/2 transform -translate-y-1/2 right-2 sm:right-4" />
+          </div>
         </form>
       </div>
-      <div className="projects tickets">
+      </div>
+      <div className="projects tickets border border-blue-500 max-h-[600px] overflow-auto">
         <div className="table-body">
           <table className="styled-table" style={{ tableLayout: "fixed" }}>
             <colgroup>
