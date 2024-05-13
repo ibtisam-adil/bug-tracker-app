@@ -34,22 +34,22 @@ const Layout = () => {
   }
 
   return (
-    <div className="layout-container">
-      <aside className="menu">
+    <div className="layout-container overflow-y-hidden">
+      <aside className="menu border-x-2">
         <div className="header">
           <img className="logo" src="./bug1.png" alt="" />
         </div>
         <nav>
           <>
-            <div>
-              <i className="bx bx-log-out"></i>
-              <NavLink to={"/"} className="nav-link">
+            <div className="hover:bg-blue-500 hover:text-white rounded-xl">
+              <img src="dashboard.png" className="w-[20px]"/>
+              <NavLink to={"/"} className="nav-link hover:text-white">
                 Dashboard
               </NavLink>
             </div>
-            <div>
-              <i className="bx bx-log-in"></i>
-              <NavLink to={"/tickets"} className="nav-link">
+            <div className="hover:bg-blue-500 hover:text-white rounded-xl"> 
+              <img src="tickets.png" className="w-[20px]" />
+              <NavLink to={"/tickets"} className="nav-link hover:text-white">
                 Tickets
               </NavLink>
             </div>
@@ -57,7 +57,7 @@ const Layout = () => {
             <div className="auth-wrap">
               {isLogin && (
                 <button
-                  className="btn auth-btn"
+                  className="btn auth-btn hover:scale-90 duration-200 transition-transform"
                   onClick={() => dispatch(logout())}
                 >
                   Logout
