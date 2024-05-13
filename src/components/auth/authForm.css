@@ -90,7 +90,7 @@ input[type='password']::placeholder input[type='text']::placeholder {
   justify-content: space-between;
   font-size: 1rem;
   background: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
-  background-clip: text;
+  background-clip: text; /* stylelint-disable-line */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -129,7 +129,7 @@ input[type='submit'] {
 
 .auth-message {
   background: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
-  background-clip: text;
+  background-clip: text; /* stylelint-disable-line */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 1.5rem;
