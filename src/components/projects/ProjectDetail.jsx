@@ -69,8 +69,8 @@ const ProjectDetail = () => {
     <div>
       {project ? (
         <>
-          <div className="project-details-header flex justify-between items-center p-4 px-8 bg-white">
-            <h1>Project Details</h1>
+          <div className="h-30 bg-white mx-auto mt-4 p-8 w-[calc(100%-30px)] rounded-lg shadow-md border-blue-500 border flex justify-between items-center">
+            <h1>{project.name}</h1>
             <div>
               <Menu>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -89,7 +89,7 @@ const ProjectDetail = () => {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="absolute right-10 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {user_type === "manager" && (
                       <>
                         <Menu.Item>
@@ -98,9 +98,9 @@ const ProjectDetail = () => {
                               onClick={handleEditProject}
                               className={classNames(
                                 active
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-700",
-                                "block px-4 py-2 text-sm"
+                                  ? "bg-blue-500 text-white"
+                                  : "text-gray-700 ",
+                                "block px-4 py-2 text-sm "
                               )}
                             >
                               Edit
@@ -114,7 +114,7 @@ const ProjectDetail = () => {
                               onClick={handleDelete}
                               className={classNames(
                                 active
-                                  ? "bg-gray-100 text-gray-900"
+                                  ? "bg-blue-500 text-white"
                                   : "text-gray-700",
                                 "block px-4 py-2 text-sm"
                               )}
@@ -132,7 +132,7 @@ const ProjectDetail = () => {
                             onClick={handleCreateTicket}
                             className={classNames(
                               active
-                                ? "bg-gray-100 text-gray-900"
+                                ? "bg-blue-500 text-white"
                                 : "text-gray-700",
                               "block px-4 py-2 text-sm"
                             )}
@@ -146,9 +146,9 @@ const ProjectDetail = () => {
                 </Transition>
               </Menu>
             </div>
-          </div>
+            </div>
 
-          <div className="grid grid-cols-2">
+          <div className="grid sm:grid-cols-2">
             <ProjectCollaborators
               project_id={project.id}
               user_type={user_type}
