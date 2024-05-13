@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const login = createAsyncThunk("login/loginUser", async (user) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/login",
+      "http://bug-zilla.onrender.com//login",
       {
         user: user,
       },
@@ -27,7 +27,7 @@ export const login = createAsyncThunk("login/loginUser", async (user) => {
 export const logout = createAsyncThunk("login/logoutUser", async () => {
   const token = localStorage.getItem("token");
   try {
-    const response = await axios.delete("http://localhost:3000/logout", {
+    const response = await axios.delete("http://bug-zilla.onrender.com//logout", {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -38,7 +38,7 @@ export const logout = createAsyncThunk("login/logoutUser", async () => {
     toast.success(data.message);
     return data;
   } catch (error) {
-    console.log(error.response.data.message);
+    throw(error.response.data.message);
   }
 });
 
@@ -46,7 +46,7 @@ export const currentUser = createAsyncThunk("login/currentUser", async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await axios.get("http://localhost:3000/current_user", {
+    const response = await axios.get("http://bug-zilla.onrender.com//current_user", {
       headers: {
         Authorization: token,
       },
@@ -54,14 +54,13 @@ export const currentUser = createAsyncThunk("login/currentUser", async () => {
     const data = response.data;
     return data;
   } catch (error) {
-    console.log('what the hell')
     throw error.response.data;
   }
 });
 
 export const signup = createAsyncThunk("signup/signupUser", async (user) => {
   try {
-    const response = await axios.post("http://localhost:3000/signup", {
+    const response = await axios.post("http://bug-zilla.onrender.com//signup", {
       user: user,
     });
     const data = response.data;
@@ -77,7 +76,7 @@ export const fetchDevelopers = createAsyncThunk(
   "developers/fetchDevelopers",
   async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.get("http://localhost:3000/users/developers", {
+    const response = await axios.get("http://bug-zilla.onrender.com//users/developers", {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -89,7 +88,7 @@ export const fetchDevelopers = createAsyncThunk(
 
 export const fetchQas = createAsyncThunk("qas/fetchQas", async () => {
   const token = localStorage.getItem("token");
-  const response = await axios.get("http://localhost:3000/users/qas", {
+  const response = await axios.get("http://bug-zilla.onrender.com//users/qas", {
     headers: {
       "Content-Type": "application/json",
       Authorization: token,

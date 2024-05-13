@@ -7,7 +7,7 @@ export const fetchTickets = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("http://localhost:3000/bugs", {
+      const response = await axios.get("http://bug-zilla.onrender.com/bugs", {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -29,7 +29,7 @@ export const fetchTicketById = createAsyncThunk(
   async (id) => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get(`http://localhost:3000/bugs/${id}`, {
+      const response = await axios.get(`http://bug-zilla.onrender.com/bugs/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -46,9 +46,8 @@ export const createTicket = createAsyncThunk(
   "tickets/createTicket",
   async (ticket) => {
     const token = localStorage.getItem("token");
-    console.log('check', ticket)
     try {
-      const response = await axios.post(`http://localhost:3000/bugs`, ticket, {
+      const response = await axios.post(`http://bug-zilla.onrender.com/bugs`, ticket, {
         headers: {
             "Content-Type": "multipart/form-data",
           Authorization: token,
@@ -68,7 +67,7 @@ export const updateTicket = createAsyncThunk(
         const token = localStorage.getItem("token");
         try {
         const response = await axios.put(
-            `http://localhost:3000/bugs/${id}`,
+            `http://bug-zilla.onrender.com/bugs/${id}`,
             ticket,
             {
             headers: {
@@ -92,7 +91,7 @@ export const assignTicket = createAsyncThunk(
     const token = localStorage.getItem("token");
     try {
       const response = await axios.put(
-        `http://localhost:3000/bugs/${ticketId}/assign_bug_or_feature/`,
+        `http://bug-zilla.onrender.com/bugs/${ticketId}/assign_bug_or_feature/`,
         null,
         {
           headers: {
@@ -116,7 +115,7 @@ export const markTicketAsCompleted = createAsyncThunk(
         const token = localStorage.getItem("token");
         try {
         const response = await axios.put(
-            `http://localhost:3000/bugs/${ticketId}/mark_resolved_or_completed/`,
+            `http://bug-zilla.onrender.com/bugs/${ticketId}/mark_resolved_or_completed/`,
             null,
             {
             headers: {
@@ -140,7 +139,7 @@ export const markTicketAsCompleted = createAsyncThunk(
             const token = localStorage.getItem("token");
             try {
             const response = await axios.delete(
-                `http://localhost:3000/bugs/${ticketId}`,
+                `http://bug-zilla.onrender.com/bugs/${ticketId}`,
                 {
                 headers: {
                     "Content-Type": "application/json",
