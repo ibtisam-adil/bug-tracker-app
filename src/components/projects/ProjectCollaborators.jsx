@@ -16,14 +16,20 @@ const ProjectCollaborators = ({ project_id, user_type }) => {
 
   return (
     <>
-      <div className="bg-[#F7F8FB] m-8">
+      <div className="bg-[#F7F8FB] m-8 border border-blue-500 sm:max-h-[600px] overflow-auto collaborator-container">
         <h3 className="text-3xl text-center p-4">Collaborators</h3>
         {user_type === "manager" && (
-          <div className="text-end px-8 pb-4">
-            <button onClick={() => setIsOpen(true)} className="btn">
-              Add Collaborator
-            </button>
-          </div>
+          <>
+            <div className="text-end px-8 pb-4">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="bg-[red] text-white sm:w-32 w-24 text-[5px] md:text-[8px] sm:py-4  p-2 rounded-xl text-center"
+              >
+                Add Collaborator
+              </button>
+            </div>
+            <div className="w-full h-[1px] bg-[#ddd]" />
+          </>
         )}
         <div className="collaborators">
           <table className="styled-table" style={{ tableLayout: "fixed" }}>
@@ -42,29 +48,34 @@ const ProjectCollaborators = ({ project_id, user_type }) => {
             </thead>
             <tbody>
               {collaborators.length > 0 &&
-                collaborators.map((collaborator) => (
-                  <tr key={collaborator.id}>
-                    <td className="project-name">{collaborator.name}</td>
-                    <td style={{ width: "65%" }}>{collaborator.user_type}</td>
-                    {user_type === "manager" && collaborator.user_type !== "manager" && (
-                      <td>
-                        <button
-                          onClick={() =>
-                            dispatch(
-                              removeUserFromProject({
-                                project_id,
-                                id: collaborator.id,
-                              })
-                            )
-                          }
-                          className="text-red-500 border-b-2 border-red-500"
-                        >
-                          Remove
-                        </button>
-                      </td>
-                    )}
-                  </tr>
-                ))}
+                collaborators.map(
+                  (collaborator) =>
+                    collaborator.user_type !== "manager" && (
+                      <tr key={collaborator.id}>
+                        <td className="project-name">{collaborator.name}</td>
+                        <td style={{ width: "65%" }}>
+                          {collaborator.user_type}
+                        </td>
+                        {collaborator.user_type === "manager" && (
+                          <td>
+                            <button
+                              onClick={() =>
+                                dispatch(
+                                  removeUserFromProject({
+                                    project_id,
+                                    id: collaborator.id,
+                                  })
+                                )
+                              }
+                              className="text-red-500 border-b-2 border-red-500"
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        )}
+                      </tr>
+                    )
+                )}
             </tbody>
           </table>
         </div>
@@ -80,7 +91,7 @@ const ProjectCollaborators = ({ project_id, user_type }) => {
 
 ProjectCollaborators.propTypes = {
   project_id: PropTypes.number.isRequired,
-    user_type: PropTypes.string.isRequired,
+  user_type: PropTypes.string.isRequired,
 };
 
 export default ProjectCollaborators;
