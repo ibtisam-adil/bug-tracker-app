@@ -9,6 +9,7 @@ import {
   deleteTicket,
 } from "./ticketThunks";
 import { logout } from "../auth/authThunks";
+import { fetchProjectTickets } from "../project_tickets/projectTicketThunks";
 
 const initialState = {
   loading: false,
@@ -113,6 +114,9 @@ const ticketSlice = createSlice({
       state.tickets = state.tickets.filter(
         (ticket) => ticket.id !== action.payload.id
       );
+    });
+    builder.addCase(fetchProjectTickets.fulfilled, (state, action) => {
+      state.tickets = action.payload.bugs;
     });
   },
 });

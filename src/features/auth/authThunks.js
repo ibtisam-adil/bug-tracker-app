@@ -17,12 +17,10 @@ export const login = createAsyncThunk("login/loginUser", async (user) => {
     );
     localStorage.setItem("token", response.headers.authorization);
     const data = response.data;
-    console.log("byyyy", data);
     toast.success(data.message);
     return data;
   } catch (error) {
-    console.log("sssssss".error);
-    toast.error(error);
+    toast.error(error.response.data);
   }
 });
 
@@ -54,10 +52,10 @@ export const currentUser = createAsyncThunk("login/currentUser", async () => {
       },
     });
     const data = response.data;
-    console.log(data);
     return data;
   } catch (error) {
-    console.log(error.response.data.errors);
+    console.log('what the hell')
+    throw error.response.data;
   }
 });
 

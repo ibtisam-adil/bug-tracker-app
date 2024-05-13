@@ -1,121 +1,3 @@
-// import { useEffect, useState } from "react";
-// import Skeleton from "react-loading-skeleton";
-// import "react-loading-skeleton/dist/skeleton.css";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchProjects } from "../../features/projects/projectThuncks";
-// import ProjectForm from "./ProjectForm";
-// import { NavLink } from "react-router-dom";
-// import "./project.css";
-// import SearchBar from "./SearchBar";
-// import SearchRezultList from "./SearchRezultList";
-
-// const Project = () => {
-//   const dispatch = useDispatch();
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const { projects, error, loading } = useSelector((state) => state.Project);
-//   const { user_type } = useSelector((state) => state.auth.user) || {};
-//   const { isLogin } = useSelector((state) => state.auth) || {};
-
-//   const [rezult, setRezult] = useState([]);
-
-//   useEffect(() => {
-//     if (isLogin) {
-//       dispatch(fetchProjects());
-//     }
-//   }, [dispatch, isLogin]);
-
-//   const renderSkeletonRows = () => {
-//     const skeletonRows = [];
-//     for (let i = 0; i < 5; i++) {
-//       skeletonRows.push(
-//         <tr key={i}>
-//           <td colSpan="4">
-//             <Skeleton />
-//           </td>
-//         </tr>
-//       );
-//     }
-//     return skeletonRows;
-//   };
-
-//   return (
-//     <>
-//       <section className="projects-section">
-//         <h1 className="dashboard-header">Dashboard</h1>
-//         <div className="w-[150px]">
-//         <SearchBar  setRezult={setRezult}/>
-//         </div>
-//         <div className="projects">
-//           <div className="project-page">
-//             <h3> Projects </h3>
-//             {user_type && user_type === "manager" && (
-//               <button
-//                 onClick={() => setIsOpen(true)}
-//                 className="btn new-project"
-//                 to="/projects/new"
-//               >
-//                 Create Project
-//               </button>
-//             )}
-//           </div>
-//           <div className="table-body">
-//             <table className="styled-table">
-//               <thead>
-//                 <tr>
-//                   <th>Project</th>
-//                   <th>Description</th>
-//                   <th>Collaborator</th>
-//                   <th>Details</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {error && (
-//                   <tr>
-//                     <td colSpan="4">{error}</td>
-//                   </tr>
-//                 )}
-//                 {loading && renderSkeletonRows()}
-//                 {!error &&
-//                   !loading &&
-//                   projects &&
-//                   projects.map((project) => (
-//                     <tr key={project.id}>
-//                       <td className="project-name">{project.name}</td>
-//                       <td style={{ width: "65%" }}>{project.description}</td>
-//                       <td>Muneeb</td>
-//                       <td>
-//                         <NavLink
-//                           className="btn"
-//                           to={`/projects/${project.id}`}
-//                           state={{ id: project.id }}
-//                         >
-//                           Details
-//                         </NavLink>
-//                       </td>
-//                     </tr>
-//                   ))}
-//                 {!error && !loading && projects.length === 0 && (
-//                   <tr>
-//                     <td colSpan="4">There are no projects.</td>
-//                   </tr>
-//                 )}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//         <ProjectForm
-//           isOpen={isOpen}
-//           setIsOpen={() => setIsOpen(false)}
-//           title="Create New Project"
-//         />
-//       </section>
-//     </>
-//   );
-// };
-
-// export default Project;
-
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -125,7 +7,6 @@ import ProjectForm from "./ProjectForm";
 import { NavLink } from "react-router-dom";
 import "./project.css";
 import SearchBar from "./SearchBar";
-import SearchRezultList from "./SearchRezultList";
 
 const Project = () => {
   const dispatch = useDispatch();
@@ -134,10 +15,11 @@ const Project = () => {
   const { projects, error, loading } = useSelector((state) => state.Project);
   const { user_type } = useSelector((state) => state.auth.user) || {};
   const { isLogin } = useSelector((state) => state.auth) || {};
-
-  const [rezult, setRezult] = useState([]);
-  const [searchError , setSearchError] = useState(false)
-  console.log(searchError)
+  const {
+    loading: searchLoading,
+    error: searchError,
+    searchResults,
+  } = useSelector((state) => state.Search);
 
   useEffect(() => {
     if (isLogin) {
@@ -145,10 +27,11 @@ const Project = () => {
     }
   }, [dispatch, isLogin]);
 
-  const filteredProjects = projects.filter((project) =>
-  rezult.some((r) => project.name.toLowerCase().includes(r.toLowerCase()))
-);
-
+  useEffect(() => {
+    if (projects && projects.length > 0) {
+      setFilteredProjects(projects);
+    }
+  }, [projects]);
 
   const renderSkeletonRows = () => {
     const skeletonRows = [];
@@ -164,29 +47,41 @@ const Project = () => {
     return skeletonRows;
   };
 
+  let [filteredProjects, setFilteredProjects] = useState(projects);
+
   return (
     <>
       <section className="projects-section">
-        <h1 className="dashboard-header">Dashboard</h1>
-        <div className="w-[150px]">
-        <SearchBar  setRezult={setRezult} setSearchError={setSearchError}/>
-        <SearchRezultList rezult={rezult} />
+        <div className="h-40 bg-white mx-auto mt-4 p-8 w-[calc(100%-30px)] rounded-lg shadow-md border-blue-500 border">
+          <SearchBar
+            searchLoading={searchLoading}
+            searchError={searchError}
+            searchrezults={searchResults}
+            setFilteredProjects={setFilteredProjects}
+            projects={projects}
+          />
         </div>
-        <div className="projects">
+        <div className="projects border border-blue-500">
           <div className="project-page">
             <h3> Projects </h3>
             {user_type && user_type === "manager" && (
               <button
                 onClick={() => setIsOpen(true)}
-                className="btn new-project"
+                className="btn new-project transition-transform duration-200 hover:scale-110"
                 to="/projects/new"
               >
                 Create Project
               </button>
             )}
           </div>
-          <div className="table-body">
+          <div className="table-body max-h-[500px] overflow-auto">
             <table className="styled-table">
+            <colgroup>
+              <col style={{ width: "18%" }} />
+              <col style={{ width: "50%" }} />
+              <col style={{ width: "18%" }} />
+              <col style={{ width: "18%" }} />
+            </colgroup>
               <thead>
                 <tr>
                   <th>Project</th>
@@ -204,12 +99,12 @@ const Project = () => {
                 {loading && renderSkeletonRows()}
                 {!error &&
                   !loading &&
-                  (rezult.length === 0 ? projects : filteredProjects).map(
-                    (project) => (
-                    <tr key={project.id}>
+                  filteredProjects &&
+                  filteredProjects.map((project) => (
+                    <tr className="sm:text-[1.3rem]" key={project.id}>
                       <td className="project-name">{project.name}</td>
-                      <td style={{ width: "65%" }}>{project.description}</td>
-                      <td>Muneeb</td>
+                      <td className="project-description">{project.description}</td>
+                      <td>muneeb</td>
                       <td>
                         <NavLink
                           className="btn"
@@ -221,7 +116,7 @@ const Project = () => {
                       </td>
                     </tr>
                   ))}
-                {!error && !loading && projects.length === 0 && (
+                {!error && !loading && filteredProjects.length === 0 && (
                   <tr>
                     <td colSpan="4">There are no projects.</td>
                   </tr>
