@@ -74,10 +74,10 @@ body {
   .live-search-container {
     width: 15rem;
   }
+
   .live-search-container input {
     font-size: 0.8rem;
   }
-
 }
 
 @media (max-width: 640px) {
