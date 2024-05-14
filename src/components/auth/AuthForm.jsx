@@ -80,15 +80,15 @@ const AuthForm = ({
                   <input
                     type="checkbox"
                     name="user_type"
-                    checked={values.user_type === "manager"}
+                    checked={values.user_type === "qa"}
                     onChange={() =>
                       setFieldValue(
                         "user_type",
-                        values.user_type === "manager" ? "developer" : "manager"
+                        values.user_type === "qa" ? "developer" : "qa"
                       )
                     }
                   />
-                  <p className="term">Are you QA?</p>
+                  <p className="term">QA?</p>
                 </label>
               </div>
             )}
