@@ -32,8 +32,8 @@ const ScreenshotPopup = ({isOpen ,setIsOpen, screenshot_url}) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel>
-                <div className="relative bg-white max-w-[400px] mx-auto rounded-xl">
-                  <img src={screenshot_url} alt="screenshot" className="w-full max-h-[500px]" />
+                <div className="relative bg-white w-[65vw] xl:w-[50vw] mx-auto rounded-xl">
+                  <img src={screenshot_url} alt="screenshot" className="w-full" />
                 </div>
               </Dialog.Panel>
             </Transition.Child>
