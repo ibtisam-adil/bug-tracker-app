@@ -36,27 +36,27 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
           >
             <Dialog.Panel>
             <Dialog.Panel>
-                <div className="relative max-w-[400px] bg-white p-12">
+                <div className="relative max-w-[400px] bg-white p-12 rounded-xl">
                   <div className="logo-head">
                     <i className="bx bxs-bug" />
                     <h2 className="heading">Demo-User Login</h2>
                   </div>
                   <div className="Users">
-                    <div onClick={() => dispatch(login({email: 'john@gmail.com', password: '123456'}))} className="user admin">
+                    <div onClick={() => dispatch(login({email: 'john@gmail.com', password: '123456'}))} className="user admin hover:scale-90 transition-transform duration-300">
                       <img
                         src="./manager.jpeg"
                         alt="admin"
                         className="user-img"
                       />
-                      <p>Project Manager</p>
+                      <p className="text-xl">Project Manager</p>
                     </div>
-                    <div  onClick={() => dispatch(login({email: 'developer@gmail.com', password: '123456'}))} className="user dev">
+                    <div onClick={() => dispatch(login({email: 'developer@gmail.com', password: '123456'}))} className="user dev hover:scale-90 transition-transform duration-300">
                       <img src="./dev.jpeg" alt="dev" className="user-img" />
-                      <p>Developer</p>
+                      <p className="text-xl">Developer</p>
                     </div>
-                    <div  onClick={() => dispatch(login({email: 'qa@gmail.com', password: '123456'}))} className="user qa">
+                    <div  onClick={() => dispatch(login({email: 'qa@gmail.com', password: '123456'}))} className="user qa hover:scale-90 transition-transform duration-300">
                       <img src="./qa.jpeg" alt="admin" className="user-img" />
-                      <p>QA</p>
+                      <p className="text-xl">QA</p>
                     </div>
                   </div>
                 </div>
