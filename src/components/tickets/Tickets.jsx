@@ -124,7 +124,7 @@ const TicketsTable = () => {
                           .includes(typeFilter.toLowerCase()))
                   )
                   .map((ticket) => (
-                    <tr className="hover:bg-blue-500 hover:text-white transition-all duration-200" key={ticket.id}>
+                    <tr className="hover:bg-blue-500 hover:text-white transition-all sm:text-[1.3rem] duration-200" key={ticket.id}>
                       <td className="project-name">
                         <NavLink state={{ id: ticket.id, project_id: ticket.project_id }} to={`${ticket.id}`}>
                           {ticket.title}

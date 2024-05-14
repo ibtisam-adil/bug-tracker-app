@@ -164,7 +164,7 @@ const Ticket = () => {
             </thead>
             <tbody>
               {ticket && ticket !== "undefined" ? (
-                <tr key={ticket.id}>
+                <tr key={ticket.id} className="sm:text-[1.3rem]">
                   <td className="project-name">
                    {ticket.title}
                   </td>
@@ -187,7 +187,7 @@ const Ticket = () => {
       
       <div className=" bg-white flex flex-col gap-4 p-4">
         <strong>description</strong>
-        <p className="w-[400px]">{ticket.description}</p>
+        <p className="w-[400px] sm:text-[1.3rem]">{ticket.description}</p>
       </div>
       <div className=" bg-white flex flex-col gap-4 p-4">
         <strong>attachement</strong>
