@@ -84,7 +84,7 @@ const AuthForm = ({
                     onChange={() =>
                       setFieldValue(
                         "user_type",
-                        values.user_type === "qa" ? "manager" : "developer"
+                        values.user_type === "manager" ? "developer" : "manager"
                       )
                     }
                   />
