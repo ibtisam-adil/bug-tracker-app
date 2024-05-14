@@ -101,7 +101,7 @@ const Project = () => {
                   !loading &&
                   filteredProjects &&
                   filteredProjects.map((project) => (
-                    <tr className="sm:text-[1.2rem] hover:bg-blue-500 hover:text-white duration-200 transition-all" key={project.id}>
+                    <tr className="sm:text-[1.3rem] hover:bg-blue-500 hover:text-white duration-200 transition-all" key={project.id}>
                       <td className="">{project.name}</td>
                       <td className="project-description">{project.description}</td>
                       <td>John</td>

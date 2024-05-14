@@ -24,7 +24,7 @@
 .styled-table th,
 .styled-table td {
   border-bottom: 1px solid #ddd;
-  padding: 0.5rem;
+  padding: 1rem;
   text-align: left;
 }
 
