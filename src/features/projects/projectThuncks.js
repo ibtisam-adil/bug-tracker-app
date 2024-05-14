@@ -7,7 +7,7 @@ export const fetchProjects = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("http://bug-zilla.onrender.com/projects", {
+      const response = await axios.get("https://bug-zilla.onrender.com/projects", {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -29,7 +29,7 @@ export const fetchProjectById = createAsyncThunk(
   async (id) => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get(`http://bug-zilla.onrender.com/projects/${id}`, {
+      const response = await axios.get(`https://bug-zilla.onrender.com/projects/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -48,7 +48,7 @@ export const createProject = createAsyncThunk(
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://bug-zilla.onrender.com/projects",
+        "https://bug-zilla.onrender.com/projects",
         project,
         {
           headers: {
@@ -72,7 +72,7 @@ export const updateProject = createAsyncThunk(
 
     try {
       const response = await axios.put(
-        `http://bug-zilla.onrender.com/projects/${id}`,
+        `https://bug-zilla.onrender.com/projects/${id}`,
         project,
         {
           headers: {
@@ -95,7 +95,7 @@ export const deleteProject = createAsyncThunk(
     const token = localStorage.getItem("token");
     try {
       const response = await axios.delete(
-        `http://bug-zilla.onrender.com/projects/${id}`,
+        `https://bug-zilla.onrender.com/projects/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
