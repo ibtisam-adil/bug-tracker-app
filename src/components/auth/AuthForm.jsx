@@ -79,13 +79,12 @@ const AuthForm = ({
                 <label htmlFor="qa" className="terms-conditions-label">
                   <input
                     type="checkbox"
-                    id="qa"
                     name="user_type"
-                    checked={values.user_type === "qa"}
+                    checked={values.user_type === "manager"}
                     onChange={() =>
                       setFieldValue(
                         "user_type",
-                        values.user_type === "qa" ? "developer" : "qa"
+                        values.user_type === "qa" ? "manager" : "developer"
                       )
                     }
                   />
