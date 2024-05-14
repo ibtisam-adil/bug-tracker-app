@@ -38,8 +38,8 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
             <Dialog.Panel>
                 <div className="relative max-w-[400px] bg-white p-12 rounded-xl">
                   <div className="logo-head">
-                    <i className="bx bxs-bug" />
-                    <h2 className="heading">Demo-User Login</h2>
+                    <i className="bx bxs-bug text-2xl" />
+                    <h2 className="heading text-2xl">Demo-User Login</h2>
                   </div>
                   <div className="Users">
                     <div onClick={() => dispatch(login({email: 'john@gmail.com', password: '123456'}))} className="user admin hover:scale-90 transition-transform duration-300">
