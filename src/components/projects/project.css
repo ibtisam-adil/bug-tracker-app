@@ -24,7 +24,7 @@
 .styled-table th,
 .styled-table td {
   border-bottom: 1px solid #ddd;
-  padding: 2rem;
+  padding: 0.5rem;
   text-align: left;
 }
 
@@ -36,7 +36,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #f7f8fb;
 }
 

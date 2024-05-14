@@ -5,6 +5,10 @@ import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const TicketsTable = () => {
   const dispatch = useDispatch();
   const [projectFilter, setProjectFilter] = useState("");
@@ -120,7 +124,7 @@ const TicketsTable = () => {
                           .includes(typeFilter.toLowerCase()))
                   )
                   .map((ticket) => (
-                    <tr key={ticket.id}>
+                    <tr className="hover:bg-blue-500 hover:text-white transition-all duration-200" key={ticket.id}>
                       <td className="project-name">
                         <NavLink state={{ id: ticket.id, project_id: ticket.project_id }} to={`${ticket.id}`}>
                           {ticket.title}
@@ -128,7 +132,11 @@ const TicketsTable = () => {
                       </td>
                       <td>{ticket.project_name}</td>
                       <td>{ticket.bug_type}</td>
-                      <td>{ticket.status}</td>
+                      <td><p className={classNames(
+                    ticket.status === "open" && "bg-green-500 text-white px-4 rounded-xl w-20" ,
+                    ticket.status === 'started' && "bg-red-500 text-white px-4 rounded-xl w-20",
+                   "bg-blue-500 text-white px-4 rounded-xl w-24 hover:bg-white hover:text-black"
+                  )}>{ticket.status}</p></td>
                     </tr>
                   ))}
               {!error && !loading && tickets.length === 0 && (

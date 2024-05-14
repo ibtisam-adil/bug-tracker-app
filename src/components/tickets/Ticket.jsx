@@ -10,6 +10,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import TicketForm from "./TicketForm";
 import { useLocation, useNavigate } from "react-router-dom";
+import ScreenshotPopup from "./ScreenshotPopup";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -28,6 +29,8 @@ const Ticket = () => {
   };
 
   const [isOpenTicket, setIsOpenTicket] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
 
   const { user_type, id: user_id } =
     useSelector((state) => state.auth.user) || {};
@@ -45,8 +48,8 @@ const Ticket = () => {
 
   return (
     <>
-      <div className="project-details-header flex justify-between items-center p-4 px-8 bg-white">
-        <h1>Project Details</h1>
+      <div className="h-30 bg-white mx-auto mt-4 p-8 w-[calc(100%-30px)] rounded-lg shadow-md border-blue-500 border flex justify-between items-center">
+        <h1>{ticket.title}</h1>
         <div>
           <Menu>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -65,7 +68,7 @@ const Ticket = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute right-16 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 {user_type === "developer" && (
                   <>
                     {ticket.status && ticket.status === "open" ? (
@@ -75,7 +78,7 @@ const Ticket = () => {
                             onClick={() => dispatch(assignTicket(ticket.id))}
                             className={classNames(
                               active
-                                ? "bg-gray-100 text-gray-900"
+                                ? "bg-blue-500 text-white"
                                 : "text-gray-700",
                               "block px-4 py-2 text-sm"
                             )}
@@ -93,7 +96,7 @@ const Ticket = () => {
                             }
                             className={classNames(
                               active
-                                ? "bg-gray-100 text-gray-900"
+                                ? "bg-blue-500 text-white"
                                 : "text-gray-700",
                               "block px-4 py-2 text-sm"
                             )}
@@ -114,9 +117,7 @@ const Ticket = () => {
                         <a
                           onClick={() => setIsOpenTicket(true)}
                           className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
+                            active ? "bg-blue-500 text-white" : "text-gray-700",
                             "block px-4 py-2 text-sm"
                           )}
                         >
@@ -129,9 +130,7 @@ const Ticket = () => {
                         <a
                           onClick={handleDeleteTicket}
                           className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
+                            active ? "bg-blue-500 text-white" : "text-gray-700",
                             "block px-4 py-2 text-sm"
                           )}
                         >
@@ -146,42 +145,56 @@ const Ticket = () => {
           </Menu>
         </div>
       </div>
-      {ticket && ticket !== "undefined" ? (
-        <div className="w-screen max-w-[800px] h-[600px] bg-white mt-20 mx-auto rounded-2xl">
-          <div className="h-[300px]">
-            <img src={ticket.screenshot_url} alt="screenshot" />
-          </div>
-          <div className="border border-red-300 w-full m-8" />
-          <div className="p-8">
-            <div className="flex justify-between">
-              <div className="flex items-center gap-2">
-                <strong>title:</strong>
-                <h3 className="p-1">{ticket.title}</h3>
-              </div>
-              <div className="flex items-center gap-2 px-4 border-2 border-red-700">
-                <strong>Status:</strong>
-                <p className="text-red-500 bold">{ticket.status}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <strong>Type:</strong>
-              <h3 className="p-1">{ticket.bug_type}</h3>
-            </div>
-
-            <div className="flex items-center pb-4 gap-2">
-              <strong>Deadline:</strong>
-              <h3 className="p-1">{ticket.deadline}</h3>
-            </div>
-            <strong>Description:</strong>
-            <p className="pt-2">{ticket.description}</p>
-          </div>
+      <div className="w-[calc(100%-30px)] mx-auto bg-whitetickets mt-8 border border-blue-500 max-h-[600px] overflow-auto">
+        <div className="bg-white">
+          <table className="styled-table" style={{ tableLayout: "fixed" }}>
+            <colgroup>
+              <col style={{ width: "25%" }} />
+              <col style={{ width: "25%" }} />
+              <col style={{ width: "25%" }} />
+              <col style={{ width: "25%" }} />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Deadline</th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ticket && ticket !== "undefined" ? (
+                <tr key={ticket.id}>
+                  <td className="project-name">
+                   {ticket.title}
+                  </td>
+                  <td>{ticket.deadline}</td>
+                  <td>{ticket.bug_type}</td>
+                  <td><p className={classNames(
+                    ticket.status === "open" && "bg-green-500 text-white px-4 rounded-xl w-20" ,
+                    ticket.status === 'started' && "bg-red-500 text-white px-4 rounded-xl w-20",
+                   "bg-blue-500 text-white px-4 rounded-xl w-24 "
+                  )}>{ticket.status}</p></td>
+                </tr>
+              ) : (
+                <tr>
+                  <td colSpan="4">There are no tickets.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      ) : (
-        <div className="flex justify-center items-center h-screen">
-          {" "}
-          <h1>No Ticket found.</h1>
-        </div>
-      )}
+      
+      <div className=" bg-white flex flex-col gap-4 p-4">
+        <strong>description</strong>
+        <p className="w-[400px]">{ticket.description}</p>
+      </div>
+      <div className=" bg-white flex flex-col gap-4 p-4">
+        <strong>attachement</strong>
+        <img onClick={() => setIsOpen(true)} className="w-[100px] h-[50px] hover:scale-90 transition-scal duration-200" src={ticket.screenshot_url} />
+      </div>
+      </div>
+      <ScreenshotPopup isOpen={isOpen} setIsOpen={() => setIsOpen(false)} screenshot_url={ticket.screenshot_url} />
       <TicketForm
         isOpen={isOpenTicket}
         setIsOpen={() => setIsOpenTicket(false)}

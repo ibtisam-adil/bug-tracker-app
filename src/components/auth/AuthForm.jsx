@@ -4,8 +4,9 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { signupSchema, signinSchema } from "../../schemas";
 import { login, signup } from "../../features/auth/authThunks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DemoUsers from "./DemoUsers";
 
 const AuthForm = ({
   title = "",
@@ -21,6 +22,7 @@ const AuthForm = ({
   const { isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { values, handleChange, handleSubmit, errors, touched, setFieldValue, handleBlur } = useFormik({
     initialValues: {
@@ -96,9 +98,12 @@ const AuthForm = ({
             </div>
           </form>
           {formType === "signin" && (
+            <>
+            <p onClick={() => setIsOpen(true)} className="text-blue-500">Demo Users</p>
             <Link to={"/signup"} className="auth-message">
               {message}
             </Link>
+            </>
           )}
           {formType === "signup" && (
             <Link to={"/signin"} className="auth-message">
@@ -111,6 +116,7 @@ const AuthForm = ({
           <p>{welcomeDetail}</p>
         </div>
       </div>
+      <DemoUsers isOpen={isOpen} setIsOpen={() => setIsOpen(false)} />
     </div>
   );
 };
