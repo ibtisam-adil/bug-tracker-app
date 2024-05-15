@@ -56,7 +56,7 @@ const ProjectCollaborators = ({ project_id, user_type }) => {
                         <td style={{ width: "65%" }}>
                           {collaborator.user_type}
                         </td>
-                        {collaborator.user_type === "manager" && (
+                        {user_type === "manager" && (
                           <td>
                             <button
                               onClick={() =>
