@@ -42,7 +42,7 @@ const DemoUsers = ({ isOpen, setIsOpen }) => {
                     <h2 className="heading text-2xl">Demo-User Login</h2>
                   </div>
                   <div className="Users">
-                    <div onClick={() => dispatch(login({email: 'john@gmail.com', password: '123456'}))} className="user admin hover:scale-90 transition-transform duration-300">
+                    <div onClick={() => dispatch(login({email: 'manager@gmail.com', password: '123456'}))} className="user admin hover:scale-90 transition-transform duration-300">
                       <img
                         src="./manager.jpeg"
                         alt="admin"

@@ -6,7 +6,7 @@ export const search = createAsyncThunk("search/search", async (value) => {
   const token = localStorage.getItem("token");
   try {
     const response = await axios.get(
-      `https://bug-zilla.onrender.com/projects/search?query=${value}`,
+      `https://bug-tracker-api-z5sf.onrender.com/projects/search?query=${value}`,
       {
         headers: {
           "Content-Type": "application/json",

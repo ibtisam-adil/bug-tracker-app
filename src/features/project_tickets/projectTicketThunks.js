@@ -7,7 +7,7 @@ export const fetchProjectTickets = createAsyncThunk(
     async (id) => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`https://bug-zilla.onrender.com/projects/${id}/users_and_bugs_by_project`, {
+            const response = await axios.get(`https://bug-tracker-api-z5sf.onrender.com/projects/${id}/users_and_bugs_by_project`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: token,
@@ -25,7 +25,7 @@ export const fetchProjectTickets = createAsyncThunk(
             const token = localStorage.getItem("token");
             try {
                 const response = await axios.post(
-                    `https://bug-zilla.onrender.com/projects/${projectId}/assign_user/${developer_id}`, 
+                    `https://bug-tracker-api-z5sf.onrender.com/projects/${projectId}/assign_user/${developer_id}`, 
                     null,
                     {
                         headers: {
@@ -49,7 +49,7 @@ export const fetchProjectTickets = createAsyncThunk(
             const token = localStorage.getItem("token");
             try {
                 const response = await axios.delete(
-                    `https://bug-zilla.onrender.com/projects/${project_id}/remove_user/${id}`,
+                    `https://bug-tracker-api-z5sf.onrender.com/projects/${project_id}/remove_user/${id}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
